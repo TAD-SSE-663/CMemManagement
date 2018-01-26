@@ -1,55 +1,65 @@
 #include <stdio.h>
 
-void PrintSectionEnd();
 
-void DemonstratePointersAndNormalVariables();
-void DemonstratePointerSizeComparison();
-void DemonstratePointerAsArgument();
-void DemonstrateArrayAsArgument();
-void DemonstratePointerAsReturn();
-void DemonstratePointerArithmetic();
-void DemonstratePointerAsArray();
-void DemonstrateArrayAsPointer();
-void DemonstrateMalloc();
-void DemonstrateCalloc();
-void DemonstrateRealloc();
-void DemonstrateDeallocation();
-void DemonstrateLinkedList();
-void DemonstratePointerToPointer();
-void DemonstratePointerToFunction();
-void DemonstrateRestrictPointer();
-void DemonstrateFlexibleArray();
+//*** Helper functions.
+
+void print_sect_end();
+
+
+//*** Major project demonstration functions.
+
+void demo_pointers_and_normal_variables();
+void demo_pointer_size_comparison();
+void demo_pointer_as_argument();
+void demo_array_as_argument();
+void demo_pointer_as_return();
+void demo_pointer_arithmetic();
+void demo_pointer_as_array();
+void demo_array_as_pointer();
+void demo_malloc();
+void demo_calloc();
+void demo_realloc();
+void demo_deallocation();
+void demo_linked_list();
+void demo_pointer_to_pointer();
+void demo_pointer_to_function();
+void demo_restrict_pointer();
+void demo_flexible_array();
+
+
+//*** Main function.
 
 int main()
 {
 	printf("\nSSE 663 Project 1 - C Memory Management.");
-	PrintSectionEnd();
-	DemonstratePointersAndNormalVariables();
-	DemonstratePointerSizeComparison();
-	DemonstratePointerAsArgument();
-	DemonstrateArrayAsArgument();
-	DemonstratePointerAsReturn();
-	DemonstratePointerArithmetic();
-	DemonstratePointerAsArray();
-	DemonstrateArrayAsPointer();
-	DemonstrateMalloc();
-	DemonstrateCalloc();
-	DemonstrateRealloc();
-	DemonstrateDeallocation();
-	DemonstrateLinkedList();
-	DemonstratePointerToPointer();
-	DemonstratePointerToFunction();
-	DemonstrateRestrictPointer();
-	DemonstrateFlexibleArray();
+	print_sect_end();
+	demo_pointers_and_normal_variables();
+	demo_pointer_size_comparison();
+	demo_pointer_as_argument();
+	demo_array_as_argument();
+	demo_pointer_as_return();
+	demo_pointer_arithmetic();
+	demo_pointer_as_array();
+	demo_array_as_pointer();
+	demo_malloc();
+	demo_calloc();
+	demo_realloc();
+	demo_deallocation();
+	demo_linked_list();
+	demo_pointer_to_pointer();
+	demo_pointer_to_function();
+	demo_restrict_pointer();
+	demo_flexible_array();
 
 	system("pause");
 	return 0;
 }
 
+
 //*** Demonstrating pointer and normal variable
 //*** similarities and differences.
 
-void DemonstratePointersAndNormalVariables()
+void demo_pointers_and_normal_variables()
 {
 	
 }
@@ -58,7 +68,7 @@ void DemonstratePointersAndNormalVariables()
 //*** Demonstrating size comparison between different
 //*** pointers and relating normal types.
 
-void DemonstratePointerSizeComparison()
+void demo_pointer_size_comparison()
 {
 	printf("Demonstrating size comparison between different\npointers and relating normal types.\n\n");
 	printf("Size of short: %d\n", sizeof(short));
@@ -80,15 +90,15 @@ void DemonstratePointerSizeComparison()
 	printf("Size of 2 member float array: %d\n", sizeof(float[2]));
 	printf("Size of 2 member float array pointer: %d\n", sizeof(float*[2]));
 	printf("Size of 2 member double array: %d\n", sizeof(double[2]));
-	printf("Size of 2 member double array pointer: %d\n", sizeof(double*[2]));
-	PrintSectionEnd();
+	printf("Size of 2 member double array pointer: %d", sizeof(double*[2]));
+	print_sect_end();
 }
 
 
 //*** Demonstrating the use of pointers as arguments
 //*** for functions.
 
-void DemonstratePointerAsArgument()
+void demo_pointer_as_argument()
 {
 
 }
@@ -97,7 +107,7 @@ void DemonstratePointerAsArgument()
 //*** Demonstrating the use of arrays as arguments
 //*** for functions.
 
-void DemonstrateArrayAsArgument()
+void demo_array_as_argument()
 {
 
 }
@@ -106,7 +116,7 @@ void DemonstrateArrayAsArgument()
 //*** Demonstrating functions that return a pointer,
 //*** not a normal variable.
 
-void DemonstratePointerAsReturn()
+void demo_pointer_as_return()
 {
 
 }
@@ -114,7 +124,7 @@ void DemonstratePointerAsReturn()
 
 //*** Demonstrating pointer arithmetic.
 
-void DemonstratePointerArithmetic()
+void demo_pointer_arithmetic()
 {
 
 }
@@ -123,7 +133,7 @@ void DemonstratePointerArithmetic()
 //*** Demonstrating the use of pointer variables
 //*** as an array.
 
-void DemonstratePointerAsArray()
+void demo_pointer_as_array()
 {
 
 }
@@ -132,7 +142,7 @@ void DemonstratePointerAsArray()
 //*** Demonstrating the use of array names as
 //*** pointers.
 
-void DemonstrateArrayAsPointer()
+void demo_array_as_pointer()
 {
 
 }
@@ -141,7 +151,7 @@ void DemonstrateArrayAsPointer()
 //*** Demonstrating the use of the stdlib function
 //*** malloc and related topics.
 
-void DemonstrateMalloc()
+void demo_malloc()
 {
 
 }
@@ -150,7 +160,7 @@ void DemonstrateMalloc()
 //*** Demonstrating the use of the stdlib function
 //*** calloc and related topics.
 
-void DemonstrateCalloc()
+void demo_calloc()
 {
 
 }
@@ -159,7 +169,7 @@ void DemonstrateCalloc()
 //*** Demonstrating the use of the stdlib function
 //*** realloc and related topics.
 
-void DemonstrateRealloc()
+void demo_realloc()
 {
 
 }
@@ -169,7 +179,7 @@ void DemonstrateRealloc()
 //*** the C programming language. Also covering
 //*** some other forms of memory allocation.
 
-void DemonstrateDeallocation()
+void demo_deallocation()
 {
 
 }
@@ -178,7 +188,7 @@ void DemonstrateDeallocation()
 //*** Demonstrating linked lists and some other
 //*** basic data structures.
 
-void DemonstrateLinkedList()
+void demo_linked_list()
 {
 
 }
@@ -186,7 +196,7 @@ void DemonstrateLinkedList()
 
 //*** Demonstrating pointers to other pointers.
 
-void DemonstratePointerToPointer()
+void demo_pointer_to_pointer()
 {
 
 }
@@ -194,7 +204,7 @@ void DemonstratePointerToPointer()
 
 //*** Demonstrating pointers to functions.
 
-void DemonstratePointerToFunction()
+void demo_pointer_to_function()
 {
 
 }
@@ -203,7 +213,7 @@ void DemonstratePointerToFunction()
 //*** Demonstrating the use of the keyword
 //*** 'restrict' and its effect on pointers.
 
-void DemonstrateRestrictPointer()
+void demo_restrict_pointer()
 {
 
 }
@@ -211,15 +221,17 @@ void DemonstrateRestrictPointer()
 
 //*** Demonstrating flexible array members.
 
-void DemonstrateFlexibleArray()
+void demo_flexible_array()
 {
 
 }
 
 
+//*** Helper functions.
+
 // Prints line to break up sections of project
 // within the console.
-void PrintSectionEnd()
+void print_sect_end()
 {
 	printf("\n\n---------------------------------------------\n\n\n");
 }
