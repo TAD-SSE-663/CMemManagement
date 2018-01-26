@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+void PrintSectionEnd();
+
 void DemonstratePointersAndNormalVariables();
 void DemonstratePointerSizeComparison();
 void DemonstratePointerAsArgument();
@@ -20,7 +22,25 @@ void DemonstrateFlexibleArray();
 
 int main()
 {
-	
+	printf("\nSSE 663 Project 1 - C Memory Management.");
+	PrintSectionEnd();
+	DemonstratePointersAndNormalVariables();
+	DemonstratePointerSizeComparison();
+	DemonstratePointerAsArgument();
+	DemonstrateArrayAsArgument();
+	DemonstratePointerAsReturn();
+	DemonstratePointerArithmetic();
+	DemonstratePointerAsArray();
+	DemonstrateArrayAsPointer();
+	DemonstrateMalloc();
+	DemonstrateCalloc();
+	DemonstrateRealloc();
+	DemonstrateDeallocation();
+	DemonstrateLinkedList();
+	DemonstratePointerToPointer();
+	DemonstratePointerToFunction();
+	DemonstrateRestrictPointer();
+	DemonstrateFlexibleArray();
 
 	system("pause");
 	return 0;
@@ -31,7 +51,7 @@ int main()
 
 void DemonstratePointersAndNormalVariables()
 {
-
+	
 }
 
 
@@ -40,7 +60,28 @@ void DemonstratePointersAndNormalVariables()
 
 void DemonstratePointerSizeComparison()
 {
-
+	printf("Demonstrating size comparison between different\npointers and relating normal types.\n\n");
+	printf("Size of short: %d\n", sizeof(short));
+	printf("Size of short pointer: %d\n", sizeof(short*));
+	printf("Size of char: %d\n", sizeof(char));
+	printf("Size of char pointer: %d\n", sizeof(char*));
+	printf("Size of int: %d\n", sizeof(int));
+	printf("Size of int pointer: %d\n", sizeof(int*));
+	printf("Size of float: %d\n", sizeof(float));
+	printf("Size of float pointer: %d\n", sizeof(float*));
+	printf("Size of long: %d\n", sizeof(long));
+	printf("Size of long pointer: %d\n", sizeof(long*));
+	printf("Size of double: %d\n", sizeof(double));
+	printf("Size of double pointer: %d\n", sizeof(double*));
+	printf("Size of 2 member char array: %d\n", sizeof(char[2]));
+	printf("Size of 2 member char array pointer: %d\n", sizeof(char*[2]));
+	printf("Size of 2 member int array: %d\n", sizeof(int[2]));
+	printf("Size of 2 member int array pointer: %d\n", sizeof(int*[2]));
+	printf("Size of 2 member float array: %d\n", sizeof(float[2]));
+	printf("Size of 2 member float array pointer: %d\n", sizeof(float*[2]));
+	printf("Size of 2 member double array: %d\n", sizeof(double[2]));
+	printf("Size of 2 member double array pointer: %d\n", sizeof(double*[2]));
+	PrintSectionEnd();
 }
 
 
@@ -173,4 +214,12 @@ void DemonstrateRestrictPointer()
 void DemonstrateFlexibleArray()
 {
 
+}
+
+
+// Prints line to break up sections of project
+// within the console.
+void PrintSectionEnd()
+{
+	printf("\n\n---------------------------------------------\n\n\n");
 }
