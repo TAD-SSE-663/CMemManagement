@@ -192,6 +192,7 @@ void demo_pointer_as_return()
 {
 	printf("Demonstrating functions that return a pointer, not a normal variable.\n\n");
 	int var = 3;
+	printf("Initial value of var: %d", var);
 	int *ptr = rtn_ptr(&var);
 	*ptr = 5;
 	printf("New value of var: %d", var);
@@ -209,7 +210,17 @@ int *rtn_ptr(int *var)
 
 void demo_pointer_arithmetic()
 {
-
+	printf("Demonstrating pointer arithmetic.\n\n");
+	int a[5] = { 0,1,2,3,4 }, *ptr1 = a;
+	printf("Initial ptr1: %p\n", ptr1);
+	printf("Initial ptr1 deref: %d\n", *ptr1);
+	ptr1 += 4;
+	int *ptr2 = ptr1 - 3;
+	printf("New ptr1: %p\n", ptr1);
+	printf("New ptr1 deref: %d\n", *ptr1);
+	printf("ptr2: %p\n", ptr2);
+	printf("ptr2 deref: %d\n", *ptr2);
+	print_sect_end();
 }
 
 
