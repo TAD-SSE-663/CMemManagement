@@ -61,7 +61,29 @@ int main()
 
 void demo_pointers_and_normal_variables()
 {
-	
+	int varA, *ptrA;
+	varA = 10;
+	ptrA = &varA;
+	printf("varA:\t\t\t%d\n", varA);
+	printf("varA reference:\t\t%p\n", &varA);
+	printf("ptrA:\t\t\t%p\n", ptrA);
+	printf("ptrA dereferenced:\t%d\n", *ptrA);
+
+	int varB = 5;
+	int *ptrB = &varB;
+	printf("ptrB:\t\t\t%p\n", ptrB);
+	printf("ptrB dereferenced:\t%d\n", *ptrB);
+	printf("varB initial:\t\t%d\n", varB);
+	*ptrB = varA;
+	printf("varB reassigned:\t%d\n\n", varB);
+	printf("ptrA: %p; ptrA dereferenced: %d\n", ptrA, *ptrA);
+	printf("ptrB: %p; ptrB dereferenced: %d\n", ptrB, *ptrB);
+	ptrB = ptrA;
+	*ptrB = 15;
+	printf("ptrA: %p; ptrA dereferenced: %d\n", ptrA, *ptrA);
+	printf("ptrB: %p; ptrB dereferenced: %d\n", ptrB, *ptrB);
+	printf("varA: %d; varB: %d", varA, varB);
+	print_sect_end();
 }
 
 
