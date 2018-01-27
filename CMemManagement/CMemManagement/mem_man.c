@@ -7,6 +7,7 @@
 //*** Helper functions.
 
 void print_sect_end();
+void nLine(int);
 
 
 //*** Major project demonstration functions.
@@ -23,7 +24,7 @@ void demo_malloc();
 void demo_calloc();
 void demo_realloc();
 void demo_deallocation();
-void demo_linked_list();
+void demo_data_struct();
 void demo_pointer_to_pointer();
 void demo_pointer_to_function();
 void demo_flexible_array();
@@ -47,7 +48,7 @@ int main()
 	demo_calloc();
 	demo_realloc();
 	demo_deallocation();
-	demo_linked_list();
+	demo_data_struct();
 	demo_pointer_to_pointer();
 	demo_pointer_to_function();
 	demo_flexible_array();
@@ -270,6 +271,7 @@ void demo_malloc()
 {
 	printf("Demonstrating the use of the stdlib function malloc and related topics.\n\n");
 	char *ptr = malloc(sizeof(char) * SIZE + 1);
+	if (ptr == NULL) return;
 	for (int i = 0; i < SIZE ; i++)
 		ptr[i] = 'a' + i;
 	ptr[SIZE] = '\0';
@@ -294,6 +296,7 @@ void demo_calloc()
 	printf("Demonstrating the use of the stdlib function calloc and related topics.\n\n");
 	char *ptr1 = malloc(sizeof(char) * SIZE);
 	char *ptr2 = calloc(SIZE * 2, sizeof(char));
+	if (ptr1 == NULL || ptr2 == NULL) return;
 	for (int i = 0; i < SIZE; i++) {
 		ptr1[i] = 'a' + i;
 		ptr2[i] = ptr1[i];
@@ -303,13 +306,13 @@ void demo_calloc()
 	printf("\nptr2 from calloc: ");
 	printf(ptr2);
 	struct cart_vect *cv2 = calloc(1, sizeof(struct cart_vect));
+	if (cv2 == NULL) return;
 	printf("\nAllocated cv2: ");
 	print_cart_vect(cv2);
 	print_sect_end();
 }
 
 // Prints the cartesian vector x, y, and z components.
-// Initializes them to 1, 1, 1 if not initialized.
 void print_cart_vect(struct cart_vect *cv)
 {
 	printf("(%d,%d,%d)", cv->xComp, cv->yComp, cv->zComp);
@@ -321,26 +324,39 @@ void print_cart_vect(struct cart_vect *cv)
 
 void demo_realloc()
 {
-
+	printf("Demonstrating the use of the stdlib function realloc and related topics.\n\n");
+	char *ptr = calloc(SIZE * 2, sizeof(char));
+	strcpy(ptr, "abcdefghi");
+	printf(ptr); nLine(1);
+	ptr = realloc(ptr, sizeof(char) * SIZE);
+	printf(ptr);
+	print_sect_end();
 }
 
 
 //*** Demonstrating the deallocation of memory in
-//*** the C programming language. Also covering
-//*** some other forms of memory allocation.
+//*** the C programming language.
 
 void demo_deallocation()
 {
-
+	printf("Demonstrating the deallocation of memory in the C programming language.\n\n");
+	char *ptr1 = calloc(SIZE, sizeof(char));
+	char *ptr2 = calloc(SIZE, sizeof(char));
+	printf("ptr1 initial: %p\n", ptr1);
+	printf("ptr2 initial: %p\n", ptr2);
+	free(ptr1);
+	ptr2 = calloc(SIZE, sizeof(char));
+	printf("ptr1 after free call: %p\n", ptr1);
+	printf("ptr2 after free call: %p", ptr2);
+	print_sect_end();
 }
 
 
-//*** Demonstrating linked lists and some other
-//*** basic data structures.
+//*** Demonstrating data structures with pointers.
 
-void demo_linked_list()
+void demo_data_struct()
 {
-
+	printf("Demonstrating data structures with pointers.\n\n");
 }
 
 
@@ -348,7 +364,7 @@ void demo_linked_list()
 
 void demo_pointer_to_pointer()
 {
-
+	printf("Demonstrating pointers to other pointers.\n\n");
 }
 
 
@@ -356,7 +372,7 @@ void demo_pointer_to_pointer()
 
 void demo_pointer_to_function()
 {
-
+	printf("Demonstrating the use of array names as pointers.\n\n");
 }
 
 
@@ -364,7 +380,7 @@ void demo_pointer_to_function()
 
 void demo_flexible_array()
 {
-
+	printf("Demonstrating flexible array members.\n\n");
 }
 
 
@@ -375,4 +391,11 @@ void demo_flexible_array()
 void print_sect_end()
 {
 	printf("\n\n---------------------------------------------\n\n\n");
+}
+
+// Prints a new line arg times.
+void nLine(int lines)
+{
+	for (int i = 0; i < lines; i++)
+		printf("\n");
 }
