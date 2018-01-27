@@ -171,7 +171,7 @@ void demo_array_as_argument()
 	array_param(a);
 	printf("After function call -\n");
 	printf("a index 0: %d\n", a[0]);
-	printf("a index 1: %d\n", a[1]);
+	printf("a index 1: %d", a[1]);
 	print_sect_end();
 }
 
@@ -192,7 +192,7 @@ void demo_pointer_as_return()
 {
 	printf("Demonstrating functions that return a pointer, not a normal variable.\n\n");
 	int var = 3;
-	printf("Initial value of var: %d", var);
+	printf("Initial value of var: %d\n", var);
 	int *ptr = rtn_ptr(&var);
 	*ptr = 5;
 	printf("New value of var: %d", var);
@@ -219,7 +219,7 @@ void demo_pointer_arithmetic()
 	printf("New ptr1: %p\n", ptr1);
 	printf("New ptr1 deref: %d\n", *ptr1);
 	printf("ptr2: %p\n", ptr2);
-	printf("ptr2 deref: %d\n", *ptr2);
+	printf("ptr2 deref: %d", *ptr2);
 	print_sect_end();
 }
 
@@ -233,7 +233,7 @@ void demo_pointer_as_array()
 {
 	printf("Demonstrating the use of pointer variables as an array.\n\n");
 	int a[SIZE] = { 0,1,2,3,4 }, *ptr;
-	printf("Using ptr to navigate array in reverse:");
+	printf("Using ptr to navigate and modify array in reverse:");
 	for (ptr = a + SIZE - 1; ptr >= a; ptr--) {
 		(*ptr)++;
 		printf(" %d", *ptr);
@@ -241,6 +241,7 @@ void demo_pointer_as_array()
 	printf("\nArray after pointer modifications:");
 	for (int i = 0; i < SIZE; i++)
 		printf(" %d", a[i]);
+	printf("\nAccessing array index 3 by pointer: %d", *(ptr + 3));
 	print_sect_end();
 }
 
@@ -250,7 +251,16 @@ void demo_pointer_as_array()
 
 void demo_array_as_pointer()
 {
-
+	printf("Demonstrating the use of array names as pointers.\n\n");
+	int a[SIZE];
+	for (int i = 0; i < SIZE; i++) {
+		*(a + i) = i;
+	}
+	for (int i = 0; i < SIZE; i++) {
+		printf("Array: %d; Ptr: %d\n", a[i], *((a + i)));
+	}
+	printf("Ptr: %p", a);
+	print_sect_end();
 }
 
 
