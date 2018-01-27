@@ -1,5 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
+#define SIZE 5
 
 //*** Helper functions.
 
@@ -23,7 +26,6 @@ void demo_deallocation();
 void demo_linked_list();
 void demo_pointer_to_pointer();
 void demo_pointer_to_function();
-void demo_restrict_pointer();
 void demo_flexible_array();
 
 
@@ -48,7 +50,6 @@ int main()
 	demo_linked_list();
 	demo_pointer_to_pointer();
 	demo_pointer_to_function();
-	demo_restrict_pointer();
 	demo_flexible_array();
 
 	system("pause");
@@ -227,8 +228,6 @@ void demo_pointer_arithmetic()
 //*** Demonstrating the use of pointer variables
 //*** as an array.
 
-#define SIZE 5
-
 void demo_pointer_as_array()
 {
 	printf("Demonstrating the use of pointer variables as an array.\n\n");
@@ -269,7 +268,13 @@ void demo_array_as_pointer()
 
 void demo_malloc()
 {
-
+	printf("Demonstrating the use of the stdlib function malloc and related topics.\n\n");
+	char *ptr = malloc(sizeof(char) * SIZE + 1);
+	for (int i = 0; i < SIZE ; i++)
+		ptr[i] = 'a' + i;
+	ptr[SIZE * 3] = '\0';
+	printf(ptr);
+	print_sect_end();
 }
 
 
@@ -321,15 +326,6 @@ void demo_pointer_to_pointer()
 //*** Demonstrating pointers to functions.
 
 void demo_pointer_to_function()
-{
-
-}
-
-
-//*** Demonstrating the use of the keyword
-//*** 'restrict' and its effect on pointers.
-
-void demo_restrict_pointer()
 {
 
 }
