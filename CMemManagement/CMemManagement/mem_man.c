@@ -272,7 +272,7 @@ void demo_malloc()
 	char *ptr = malloc(sizeof(char) * SIZE + 1);
 	for (int i = 0; i < SIZE ; i++)
 		ptr[i] = 'a' + i;
-	ptr[SIZE * 3] = '\0';
+	ptr[SIZE] = '\0';
 	printf(ptr);
 	print_sect_end();
 }
@@ -281,9 +281,38 @@ void demo_malloc()
 //*** Demonstrating the use of the stdlib function
 //*** calloc and related topics.
 
+struct cart_vect {
+	int xComp;
+	int yComp;
+	int zComp;
+};
+
+void print_cart_vect(struct cart_vect *);
+
 void demo_calloc()
 {
+	printf("Demonstrating the use of the stdlib function calloc and related topics.\n\n");
+	char *ptr1 = malloc(sizeof(char) * SIZE);
+	char *ptr2 = calloc(SIZE * 2, sizeof(char));
+	for (int i = 0; i < SIZE; i++) {
+		ptr1[i] = 'a' + i;
+		ptr2[i] = ptr1[i];
+	}
+	printf("ptr1 from malloc: ");
+	printf(ptr1);
+	printf("\nptr2 from calloc: ");
+	printf(ptr2);
+	struct cart_vect *cv2 = calloc(1, sizeof(struct cart_vect));
+	printf("\nAllocated cv2: ");
+	print_cart_vect(cv2);
+	print_sect_end();
+}
 
+// Prints the cartesian vector x, y, and z components.
+// Initializes them to 1, 1, 1 if not initialized.
+void print_cart_vect(struct cart_vect *cv)
+{
+	printf("(%d,%d,%d)", cv->xComp, cv->yComp, cv->zComp);
 }
 
 
