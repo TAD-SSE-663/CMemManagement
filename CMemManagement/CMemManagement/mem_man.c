@@ -227,9 +227,21 @@ void demo_pointer_arithmetic()
 //*** Demonstrating the use of pointer variables
 //*** as an array.
 
+#define SIZE 5
+
 void demo_pointer_as_array()
 {
-
+	printf("Demonstrating the use of pointer variables as an array.\n\n");
+	int a[SIZE] = { 0,1,2,3,4 }, *ptr;
+	printf("Using ptr to navigate array in reverse:");
+	for (ptr = a + SIZE - 1; ptr >= a; ptr--) {
+		(*ptr)++;
+		printf(" %d", *ptr);
+	}
+	printf("\nArray after pointer modifications:");
+	for (int i = 0; i < SIZE; i++)
+		printf(" %d", a[i]);
+	print_sect_end();
 }
 
 
