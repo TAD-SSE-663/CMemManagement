@@ -61,6 +61,7 @@ int main()
 
 void demo_pointers_and_normal_variables()
 {
+	printf("Demonstrating pointer and normal variable similarities and differences.\n\n");
 	int varA, *ptrA;
 	varA = 10;
 	ptrA = &varA;
@@ -74,15 +75,19 @@ void demo_pointers_and_normal_variables()
 	printf("ptrB:\t\t\t%p\n", ptrB);
 	printf("ptrB dereferenced:\t%d\n", *ptrB);
 	printf("varB initial:\t\t%d\n", varB);
+
 	*ptrB = varA;
 	printf("varB reassigned:\t%d\n\n", varB);
 	printf("ptrA: %p; ptrA dereferenced: %d\n", ptrA, *ptrA);
 	printf("ptrB: %p; ptrB dereferenced: %d\n", ptrB, *ptrB);
+
 	ptrB = ptrA;
 	*ptrB = 15;
 	printf("ptrA: %p; ptrA dereferenced: %d\n", ptrA, *ptrA);
 	printf("ptrB: %p; ptrB dereferenced: %d\n", ptrB, *ptrB);
-	printf("varA: %d; varB: %d", varA, varB);
+	printf("varA: %d; varB: %d\n\n", varA, varB);
+
+	printf("varA dereferenced reference: %d", *&varA);
 	print_sect_end();
 }
 
@@ -120,9 +125,36 @@ void demo_pointer_size_comparison()
 //*** Demonstrating the use of pointers as arguments
 //*** for functions.
 
+void normal_param_inc(int);
+void pointer_param_inc(int *);
+
 void demo_pointer_as_argument()
 {
+	printf("Demonstrating the use of pointers as arguments for functions.\n\n");
+	int varA = 0, *ptrA = &varA;
+	printf("varA initial: %d; varA initial ref: %p\n", varA, &varA);
+	printf("ptrA initial: %p; ptrA initial deref: %d\n\n", ptrA, *ptrA);
+	normal_param_inc(varA);
+	normal_param_inc(*ptrA);
+	printf("varA pbv: %d; varA pbv ref: %p\n", varA, &varA);
+	printf("ptrA pbv: %p; ptrA pbv deref: %d\n\n", ptrA, *ptrA);
+	pointer_param_inc(&varA);
+	pointer_param_inc(ptrA);
+	printf("varA pbr: %d; varA pbr ref: %p\n", varA, &varA);
+	printf("ptrA pbr: %p; ptrA pbr deref: %d", ptrA, *ptrA);
+	print_sect_end();
+}
 
+// Increments varA as passed by value.
+void normal_param_inc(int varA)
+{
+	varA++;
+}
+
+// Increments *ptrA passed by reference.
+void pointer_param_inc(int *ptrA)
+{
+	(*ptrA)++;
 }
 
 
