@@ -175,6 +175,7 @@ void demo_array_as_argument()
 	print_sect_end();
 }
 
+// Sets index 0 and 1 of arg to 10 and 20, respectively.
 void array_param(int a[])
 {
 	a[0] = 10;
@@ -185,9 +186,22 @@ void array_param(int a[])
 //*** Demonstrating functions that return a pointer,
 //*** not a normal variable.
 
+int *rtn_ptr(int*);
+
 void demo_pointer_as_return()
 {
+	printf("Demonstrating functions that return a pointer, not a normal variable.\n\n");
+	int var = 3;
+	int *ptr = rtn_ptr(&var);
+	*ptr = 5;
+	printf("New value of var: %d", var);
+	print_sect_end();
+}
 
+// Returns the arg passed in.
+int *rtn_ptr(int *var)
+{
+	return var;
 }
 
 
