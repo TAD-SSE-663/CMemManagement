@@ -145,13 +145,13 @@ void demo_pointer_as_argument()
 	print_sect_end();
 }
 
-// Increments varA as passed by value.
+// Increments arg as passed by value.
 void normal_param_inc(int varA)
 {
 	varA++;
 }
 
-// Increments *ptrA passed by reference.
+// Increments arg passed by reference.
 void pointer_param_inc(int *ptrA)
 {
 	(*ptrA)++;
@@ -161,9 +161,24 @@ void pointer_param_inc(int *ptrA)
 //*** Demonstrating the use of arrays as arguments
 //*** for functions.
 
+void array_param(int[]);
+
 void demo_array_as_argument()
 {
+	printf("Demonstrating the use of arrays as arguments for functions.\n\n");
+	int a[2] = {0, 0};
+	printf("Initial index 1 and 2 of a: %d and %d\n", a[0], a[1]);
+	array_param(a);
+	printf("After function call -\n");
+	printf("a index 0: %d\n", a[0]);
+	printf("a index 1: %d\n", a[1]);
+	print_sect_end();
+}
 
+void array_param(int a[])
+{
+	a[0] = 10;
+	a[1] = 20;
 }
 
 
