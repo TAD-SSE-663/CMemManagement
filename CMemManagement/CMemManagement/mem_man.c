@@ -265,23 +265,24 @@ void demo_array_as_pointer()
 
 
 //*** Demonstrating the use of the stdlib function
-//*** malloc and related topics.
+//*** malloc.
 
 void demo_malloc()
 {
-	printf("Demonstrating the use of the stdlib function malloc and related topics.\n\n");
+	printf("Demonstrating the use of the stdlib function malloc.\n\n");
 	char *ptr = malloc(sizeof(char) * SIZE + 1);
 	if (ptr == NULL) return;
 	for (int i = 0; i < SIZE ; i++)
 		ptr[i] = 'a' + i;
 	ptr[SIZE] = '\0';
 	printf(ptr);
+	free(ptr);
 	print_sect_end();
 }
 
 
 //*** Demonstrating the use of the stdlib function
-//*** calloc and related topics.
+//*** calloc.
 
 struct cart_vect {
 	int xComp;
@@ -293,7 +294,7 @@ void print_cart_vect(struct cart_vect *);
 
 void demo_calloc()
 {
-	printf("Demonstrating the use of the stdlib function calloc and related topics.\n\n");
+	printf("Demonstrating the use of the stdlib function calloc.\n\n");
 	char *ptr1 = malloc(sizeof(char) * SIZE);
 	char *ptr2 = calloc(SIZE * 2, sizeof(char));
 	if (ptr1 == NULL || ptr2 == NULL) return;
@@ -305,10 +306,11 @@ void demo_calloc()
 	printf(ptr1);
 	printf("\nptr2 from calloc: ");
 	printf(ptr2);
-	struct cart_vect *cv2 = calloc(1, sizeof(struct cart_vect));
-	if (cv2 == NULL) return;
-	printf("\nAllocated cv2: ");
-	print_cart_vect(cv2);
+	struct cart_vect *cv1 = calloc(1, sizeof(struct cart_vect));
+	if (cv1 == NULL) return;
+	printf("\nAllocated cv1: ");
+	print_cart_vect(cv1);
+	free(ptr1); free(ptr2); free(cv1);
 	print_sect_end();
 }
 
@@ -320,16 +322,19 @@ void print_cart_vect(struct cart_vect *cv)
 
 
 //*** Demonstrating the use of the stdlib function
-//*** realloc and related topics.
+//*** realloc.
 
 void demo_realloc()
 {
-	printf("Demonstrating the use of the stdlib function realloc and related topics.\n\n");
+	printf("Demonstrating the use of the stdlib function realloc.\n\n");
 	char *ptr = calloc(SIZE * 2, sizeof(char));
+	if (ptr == NULL) return;
 	strcpy(ptr, "abcdefghi");
 	printf(ptr); nLine(1);
 	ptr = realloc(ptr, sizeof(char) * SIZE);
+	if (ptr == NULL) return;
 	printf(ptr);
+	free(ptr);
 	print_sect_end();
 }
 
@@ -342,27 +347,235 @@ void demo_deallocation()
 	printf("Demonstrating the deallocation of memory in the C programming language.\n\n");
 	char *ptr1 = calloc(SIZE, sizeof(char));
 	char *ptr2 = calloc(SIZE, sizeof(char));
+	if (ptr1 == NULL || ptr2 == NULL) return;
 	printf("ptr1 initial: %p\n", ptr1);
 	printf("ptr2 initial: %p\n", ptr2);
 	free(ptr1);
 	ptr2 = calloc(SIZE, sizeof(char));
 	printf("ptr1 after free call: %p\n", ptr1);
 	printf("ptr2 after free call: %p", ptr2);
+	free(ptr2);
 	print_sect_end();
 }
 
 
 //*** Demonstrating data structures with pointers.
 
-struct doubly_list {
+#define NOT_FOUND -999
+
+struct node {
 	int val;
-	struct doubly_list *prev;
-	struct doubly_list *next;
+	struct node *prev;
+	struct node *next;
 };
+
+void add_to_end(int);
+void add_to_begin(int);
+void delete_prev(struct node*);
+void delete_next(struct node*);
+void delete_this(struct node*);
+struct node *find(int);
+int get_val(struct node*);
+void destroy_list();
+void print_list();
+
+// Pointer to beginning of list.
+struct node *first = NULL;
+
+// Pointer to end of list.
+struct node *last = NULL;
 
 void demo_data_struct()
 {
 	printf("Demonstrating data structures with pointers.\n\n");
+	print_list(); nLine(1);
+	find(2); nLine(1);
+	add_to_begin(1);
+	add_to_end(2);
+	add_to_end(3);
+	add_to_begin(0);
+	for (int i = 4; i < 10; i++)
+		add_to_end(i);
+	print_list(); nLine(1);
+	find(22); nLine(1);
+	struct node *a = find(5);
+	delete_prev(a);
+	delete_next(a);
+	delete_this(a);
+	print_list(); nLine(1);
+	destroy_list();
+	print_list();
+	print_sect_end();
+}
+
+// Adds new node with specified value to the end
+// of the list.
+void add_to_end(int val)
+{
+	struct node *new_n = malloc(sizeof(struct node));
+	if (new_n == NULL) {
+		printf("ERROR adding to end.");
+		return;
+	}
+	new_n->val = val;
+	new_n->prev = NULL;
+	new_n->next = NULL;
+	if (first == NULL)
+		first = new_n;
+	if (last == NULL)
+		last = new_n;
+	else {
+		new_n->prev = last;
+		last->next = new_n;
+		last = new_n;
+	}
+}
+
+// Adds new node with specified value to the
+// beginning of the list.
+void add_to_begin(int val)
+{
+	struct node *new_n = malloc(sizeof(struct node));
+	if (new_n == NULL) {
+		printf("ERROR adding to beginning.");
+		return;
+	}
+	new_n->val = val;
+	new_n->prev = NULL;
+	new_n->next = NULL;
+	if (first == NULL)
+		first = new_n;
+	if (last == NULL)
+		last = new_n;
+	else {
+		new_n->next = first;
+		first->prev = new_n;
+		first = new_n;
+	}
+}
+
+// Deletes the node previous to the specified
+// node if it exist.
+void delete_prev(struct node *n)
+{
+	if (n == NULL || n->prev == NULL)
+		return;
+	if (n->prev->prev == NULL) {
+		free(n->prev);
+		n->prev = NULL;
+		first = n;
+	} else {
+		struct node *temp = n->prev->prev;
+		free(n->prev);
+		n->prev = NULL;
+		temp->next = n;
+		n->prev = temp;
+	}
+}
+
+// Deletes the node after the specified node
+// if it exists.
+void delete_next(struct node *n)
+{
+	if (n == NULL || n->next == NULL)
+		return;
+	if (n->next->next == NULL) {
+		free(n->next);
+		n->next = NULL;
+		last = n;
+	} else {
+		struct node *temp = n->next->next;
+		free(n->next);
+		n->next = NULL;
+		temp->prev = n;
+		n->next = temp;
+	}
+}
+
+// Deletes the specified node from the list.
+void delete_this(struct node *n)
+{
+	if (n == NULL) return;
+	if (n->next == NULL && n->prev == NULL) {
+		free(n);
+		n = NULL;
+	} else if (n->next == NULL) {
+		struct node *temp = n->prev;
+		free(n);
+		n = NULL;
+		last = temp;
+	} else if (n->prev == NULL) {
+		struct node *temp = n->next;
+		free(n);
+		n = NULL;
+		first = temp;
+	} else {
+		struct node *temp = n->prev;
+		temp->next = n->next;
+		n->next->prev = temp;
+		free(n);
+		n = NULL;
+	}
+}
+
+// Returns a pointer to the node with the
+// specified value if it exists.
+struct node *find(int val)
+{
+	struct node *n = first;
+	if (n == NULL) {
+		printf("List is null.");
+		return n;
+	} else {
+		while (n != NULL && n->val != val)
+			n = n->next;
+		if (n == NULL || n->val != val) {
+			printf("Value is not in list.");
+			return n;
+		} else {
+			return n;
+		}
+	}
+}
+
+// Returns the value of the specified node.
+int get_val(struct node *n)
+{
+	if (n == NULL)
+		return NOT_FOUND;
+	return n->val;
+}
+
+// Frees all memory for the list.
+void destroy_list()
+{
+	if (first == NULL) return;
+	struct node *n = first;
+	while (n->next != NULL) {
+		n = n->next;
+		free(n->prev);
+		n->prev = NULL;
+	}
+	free(n);
+	first = NULL;
+	last = NULL;
+	n = NULL;
+}
+
+// Prints the list values in order of 
+// beginning to end.
+void print_list()
+{
+	struct node *n = first;
+	printf("The list is as follows: ");
+	if (n == NULL)
+		printf("No list created.\n");
+	else {
+		while (n != NULL) {
+			printf(" %d", n->val);
+			n = n->next;
+		}
+	}
 }
 
 
@@ -399,7 +612,7 @@ void demo_pointer_to_function()
 {
 	printf("Demonstrating the use of array names as pointers.\n\n");
 	int var1 = 10, var2 = 5;
-	printf("Operands to be used: %d and %d", var1, var2);
+	printf("Operands to be used: %d and %d\n", var1, var2);
 	printf("Result of adding: %d\n", perform_op(add, var1, var2));
 	printf("Result of subtracting: %d", perform_op(sub, var1, var2));
 	print_sect_end();
@@ -426,10 +639,26 @@ int sub(int a, int b)
 
 //*** Demonstrating flexible array members.
 
+struct string {
+	int length;
+	char str[];
+};
+
 void demo_flexible_array()
 {
 	printf("Demonstrating flexible array members.\n\n");
-
+	struct string *s1 = malloc(sizeof(struct string) + (sizeof(char) * SIZE));
+	struct string *s2 = malloc(sizeof(struct string) + (sizeof(char) * SIZE));
+	if (s1 == NULL || s2 == NULL) return;
+	s1->length = SIZE;
+	s2->length = SIZE;
+	strcpy(s1->str, "abcd");
+	strcpy(s2->str, "efgh");
+	printf("s1 length: %d; s2 length: %d\n", s1->length, s2->length);
+	printf("s1 str: %s; s2 str: %s\n", s1->str, s2->str);
+	printf("s1: %p; s2: %p", s1, s2);
+	free(s1); free(s2);
+	print_sect_end();
 }
 
 
