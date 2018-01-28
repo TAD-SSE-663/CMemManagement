@@ -354,6 +354,12 @@ void demo_deallocation()
 
 //*** Demonstrating data structures with pointers.
 
+struct doubly_list {
+	int val;
+	struct doubly_list *prev;
+	struct doubly_list *next;
+};
+
 void demo_data_struct()
 {
 	printf("Demonstrating data structures with pointers.\n\n");
@@ -362,25 +368,68 @@ void demo_data_struct()
 
 //*** Demonstrating pointers to other pointers.
 
+void point_to_other(int**, int*);
+
 void demo_pointer_to_pointer()
 {
 	printf("Demonstrating pointers to other pointers.\n\n");
+	int var1 = 15, var2 = 30, *ptr = &var1;
+	printf("Before -\n");
+	printf("ptr: %p; ptr deref: %d\n", ptr, *ptr);
+	point_to_other(&ptr, &var2);
+	printf("After -\n");
+	printf("ptr: %p; ptr deref: %d\n", ptr, *ptr);
+	print_sect_end();
+}
+
+// Points ptr to other.
+void point_to_other(int **ptr, int *other)
+{
+	*ptr = other;
 }
 
 
 //*** Demonstrating pointers to functions.
 
+int perform_op(int(*)(int), int, int);
+int add(int, int);
+int sub(int, int);
+
 void demo_pointer_to_function()
 {
 	printf("Demonstrating the use of array names as pointers.\n\n");
+	int var1 = 10, var2 = 5;
+	printf("Operands to be used: %d and %d", var1, var2);
+	printf("Result of adding: %d\n", perform_op(add, var1, var2));
+	printf("Result of subtracting: %d", perform_op(sub, var1, var2));
+	print_sect_end();
 }
 
+// Performs operation specified on val1 and val2.
+// Returns the result.
+int perform_op(int(*fxn)(int), int val1, int val2)
+{
+	return (*fxn)(val1, val2);
+}
+
+// Returns the sum of a and b.
+int add(int a, int b)
+{
+	return a + b;
+}
+
+// Returns the difference of a and b.
+int sub(int a, int b)
+{
+	return a - b;
+}
 
 //*** Demonstrating flexible array members.
 
 void demo_flexible_array()
 {
 	printf("Demonstrating flexible array members.\n\n");
+
 }
 
 
