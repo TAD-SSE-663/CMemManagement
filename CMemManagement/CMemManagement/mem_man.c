@@ -34,6 +34,7 @@ void demo_flexible_array();
 
 int main()
 {
+	printf("%d", sizeof(char[8]));
 	printf("\nSSE 663 Project 1 - C Memory Management.");
 	print_sect_end();
 	demo_pointers_and_normal_variables();
@@ -610,7 +611,7 @@ int sub(int, int);
 
 void demo_pointer_to_function()
 {
-	printf("Demonstrating the use of array names as pointers.\n\n");
+	printf("Demonstrating pointers to functions.\n\n");
 	int var1 = 10, var2 = 5;
 	printf("Operands to be used: %d and %d\n", var1, var2);
 	printf("Result of adding: %d\n", perform_op(add, var1, var2));
